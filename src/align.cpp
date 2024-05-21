@@ -164,7 +164,7 @@ int main(int argc, char** argv) {
   std::cout << "--- fgicp_mt ---" << std::endl;
   fast_gicp::FastGICP<pcl::PointXYZ, pcl::PointXYZ> fgicp_mt;
   // fast_gicp uses all the CPU cores by default
-  // fgicp_mt.setNumThreads(8);
+  fgicp_mt.setNumThreads(8);
   test(fgicp_mt, target_cloud, source_cloud);
 
   std::cout << "--- vgicp_st ---" << std::endl;
@@ -174,7 +174,8 @@ int main(int argc, char** argv) {
   test(vgicp, target_cloud, source_cloud);
 
   std::cout << "--- vgicp_mt ---" << std::endl;
-  vgicp.setNumThreads(omp_get_max_threads());
+  // vgicp.setNumThreads(omp_get_max_threads());
+  fgicp_mt.setNumThreads(8);
   test(vgicp, target_cloud, source_cloud);
 
 #ifdef USE_VGICP_CUDA
