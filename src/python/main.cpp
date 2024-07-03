@@ -105,6 +105,8 @@ Eigen::Matrix4d align_points(
     vgicp->setResolution(voxel_resolution);
     vgicp->setNeighborSearchMethod(search_method(neighbor_search_method));
     vgicp->setNumThreads(num_threads);
+    vgicp->setRegularizationMethod(fast_gicp::RegularizationMethod::FROBENIUS);
+    vgicp->setVoxelAccumulationMode(fast_gicp::VoxelAccumulationMode::MULTIPLICATIVE);
     reg = vgicp;
   } else if (method == "VGICP_CUDA") {
 #ifdef USE_VGICP_CUDA
